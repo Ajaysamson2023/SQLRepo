@@ -1,0 +1,48 @@
+-- Creating a database
+create database School
+use School
+
+--  Creating a table name locations
+Create table Locations
+(country_id varchar(50) NOT NULL,
+country_name varchar(50),
+region_id varchar(30) UNIQUE NOT NULL
+);
+
+
+-- Rename the table from locations to locations_new
+EXEC sp_rename  'Locations' ,'Locations_new';
+
+-- getting all the records from the table
+select * from Locations_new;
+
+-- Adding a new column named ID int
+alter table Locations_new add ID INT;
+
+-- checking for the details of the column
+EXEC sp_help 'Locations_new';
+
+--To get all records by using query:
+select * from Locations_new;
+
+-- Drop the column ID from the table Locations_new:
+alter table Locations_new drop COLUMN ID;
+
+select * from Locations_new;
+
+-- Adding a column to the table:
+alter table Locations_new add state_province varchar(50);
+
+-- Rename a column:
+EXEC sp_rename 'Locations_new.region_id','id_Region','column';
+
+
+-- Backup database by using query:
+/*backup database School 
+to disk = 'E:\New folder\MSSQL16.MSSQLSERVER\MSSQL\Backup'
+
+drop database School
+--Restore database by using query:
+restore database School 
+from disk = 'E:\New folder\MSSQL16.MSSQLSERVER\MSSQL\Backup'
+*/
