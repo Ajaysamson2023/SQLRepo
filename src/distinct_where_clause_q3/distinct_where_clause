@@ -1,0 +1,48 @@
+-- To use database School:
+use School
+
+-- Creating table using query:
+create table Salesman (
+    Salesman_id INT IDENTITY(5001,1) PRIMARY KEY,
+    Name VARCHAR(50),
+    City VARCHAR(50),
+    Commission DECIMAL(5,2));
+
+-- Inserting values:
+insert into Salesman(Name,City,Commission) values('James Hoog','New York',0.15),('Nail Knite','Paris',0.13),('Pit Alex','London',0.11),('Mc Lyon','Paris',0.14),('Paul Adam','Paris',0.13),('Lauson Hen','San Jose',0.12);
+
+select * from Salesman;
+
+
+insert into Salesman(Name,City,Commission) values('James Hoog','New York',0.15),('Nail Knite','Paris',0.13),('Pit Alex','London',0.11),('Mc Lyon','Paris',0.14),('Paul Adam','Paris',0.13),('Lauson Hen','San Jose',0.12);
+
+-- To display records in the table:
+select * from Salesman;
+
+-- To Display  unique values
+select distinct(City)
+from Salesman;
+
+select distinct * from salesman;
+
+-- To Display the Unique values:
+
+select distinct Name,  City
+from Salesman;
+
+-- To Display the rows of cities not belong to paris:
+
+select * from Salesman
+where city <> 'Paris';
+
+-- To Display records of the salesman where city is paris and commission > 0.14:
+
+select * from Salesman where City ='Paris' and Commission > 0.14;
+
+-- To Sort sales using order by:
+
+select * from Salesman order by commission asc;
+
+-- To Display  records not to san jose:
+select * from Salesman
+where city NOT IN ('San Jose');
