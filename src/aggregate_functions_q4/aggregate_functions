@@ -1,0 +1,27 @@
+use AdventureWorksDW2019
+
+-- To select all records from DimCustomer:
+
+select * from DimCustomer
+
+
+-- To get the lastname in asc using order by query:
+
+select lastname from dbo.DimCustomer
+order by lastname;
+
+-- To get top 20 records from dimproduct table:
+
+select TOP 20 *
+from dbo.DimProduct;
+
+-- To get top 50 percent records from DimCustomer :
+
+select TOP 50 percent *
+from dbo.DimCustomer;
+
+-- To get yearly income  maximum and minimum:
+
+select max(Yearlyincome) as maximum,min(Yearlyincome) as minimum
+from dbo.DimCustomer;
+
