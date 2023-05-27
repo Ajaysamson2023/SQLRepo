@@ -1,39 +1,47 @@
+-- To use AdventureWorksDW2019:
 use AdventureWorksDW2019
 
---To create Employee table:
-create table Employee (
-  EmployeeID INT PRIMARY KEY,EName varchar(50),DeptID INT,Salary decimal(10, 2));
+-- To Create Employee_Details:
+CREATE table Employee_Details (
+  EmployeeID INT NOT NULL PRIMARY KEY, Firstname varchar(30), LastName varchar(30),
+  Salary INT, Department varchar(30), Gender varchar(30)
+)
 
--- To insert values into Employee table:
-INSERT into Employee (EmployeeID, EName, DeptID, Salary)
+-- To Insert values into Employee_Details:
+INSERT INTO Employee_Details (EmployeeID, Firstname, LastName, Salary, Department, Gender)
 VALUES
-  (1001, 'John', 2, 4000), (1002, 'Anna', 1, 3500),(1003, 'James', 1, 2500),(1004, 'David', 2, 5000),
-  (1005, 'Mark', 2, 3000),(1006, 'Steve', 3, 4500),(1007, 'Alice', 3, 3500);
+  (1, 'Vikas', 'Ahlawat', 600000, 'IT', 'Male'),(2, 'Nikita', 'Jain', 530000, 'HR', 'Female'),
+  (3, 'Ashish', 'Kumar', 10000000, 'IT', 'Male'),(4, 'Nikhil', 'Sharma', 480000, 'HR', 'Male'),
+  (5, 'Anish', 'Kadian', 500000, 'Payroll', 'Male')
 
--- To get Average salary by using groupby,AVG by using query:
-SELECT DeptID, AVG(Salary) AS AvgSalary from Employee GROUP BY DeptID;
+--  To Create table of Project_Details:
+CREATE TABLE Project_Detail (
+  ProjectDetailID INT,
+  EmployeeID INT NOT NULL,
+  ProjectName varchar(50)
+);
 
--- To get AVG salary by using AVG,Group bby,Having query:
-SELECT DeptID, AVG(Salary) AS AvgSalary from Employee GROUP BY DeptID HAVING AVG(Salary)>3000;
+-- To Insert values in Project_Details:
+INSERT INTO Project_Detail (ProjectDetailID, EmployeeID, ProjectName)
+VALUES
+  (1, 1, 'Task track'),(2, 1, 'CLP'),(3, 1, 'Survey Management'),(4, 2, 'HR Management'),(5, 3, 'Task Track'),
+  (6, 3, 'GRS'),(7, 3, 'DDS'),(8, 4, 'HR Management'),(9, 6, 'GL Management');
 
--- To Create table DEPARTMENT:
-CREATE table Department (DeptID INT ,DName varchar(50), DLocation varchar(50));
+-- To get the values by using JOIN query:
+SELECT E.Firstname, P.ProjectName FROM Employee_details E
+JOIN Project_Detail P ON E.EmployeeID = P.EmployeeID
+ORDER BY E.Firstname;
 
--- To insert values in department:
-INSERT into Department(DeptID,DName,DLocation) values (1,'HR','Mumbai'),(2,'IT','NewDelhi'),(3,'Finance','Mumbai');
+-- To get the values by using LEFT JOIN query:
+SELECT E. Firstname,P.ProjectName FROM Employee_details E
+LEFT JOIN Project_Detail P ON E.EmployeeID = P.EmployeeID;
 
--- To get the values by using join query:
-SELECT E.EmployeeID, E.EName, E.Salary, D.DName, D.DLocation from Employee E
-JOIN Department D ON E.DeptID = D.DeptID;
+-- To get the values by using RIGHT JOIN query:
+SELECT P.ProjectName,E.Firstname FROM Employee_details E
+RIGHT JOIN Project_Detail P ON E.EmployeeID = P.EmployeeID
+ORDER BY E.Firstname;
 
--- To get the values by using AVG, join and group by query:
-SELECT D.DName, AVG(E.Salary) AS AvgSalary from Department D
-JOIN Employee E ON D.DeptID = E.DeptID
-GROUP BY D.DName;
+-- To get the values by using FULL JOIN query:
 
--- To get values from AdventureWorksDW2019 by using Union query:
-
-SELECT FirstName, BirthDate from DimCustomer WHERE BirthDate BETWEEN '1985-01-01' AND '1985-12-01'UNION
-SELECT FirstName, BirthDate from DimEmployee WHERE BirthDate BETWEEN '1985-01-01' AND '1985-12-01';
-
-
+SELECT * FROM Employee_details E
+FULL JOIN Project_Detail P ON E.EmployeeID = P.EmployeeID;
