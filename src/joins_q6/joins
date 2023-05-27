@@ -1,0 +1,47 @@
+-- To use AdventureWorksDW2019:
+use AdventureWorksDW2019
+
+-- To Create Employee_Details:
+CREATE table Employee_Details (
+  EmployeeID INT NOT NULL PRIMARY KEY, Firstname varchar(30), LastName varchar(30),
+  Salary INT, Department varchar(30), Gender varchar(30)
+)
+
+-- To Insert values into Employee_Details:
+INSERT INTO Employee_Details (EmployeeID, Firstname, LastName, Salary, Department, Gender)
+VALUES
+  (1, 'Vikas', 'Ahlawat', 600000, 'IT', 'Male'),(2, 'Nikita', 'Jain', 530000, 'HR', 'Female'),
+  (3, 'Ashish', 'Kumar', 10000000, 'IT', 'Male'),(4, 'Nikhil', 'Sharma', 480000, 'HR', 'Male'),
+  (5, 'Anish', 'Kadian', 500000, 'Payroll', 'Male')
+
+--  To Create table of Project_Details:
+CREATE TABLE Project_Detail (
+  ProjectDetailID INT,
+  EmployeeID INT NOT NULL,
+  ProjectName varchar(50)
+);
+
+-- To Insert values in Project_Details:
+INSERT INTO Project_Detail (ProjectDetailID, EmployeeID, ProjectName)
+VALUES
+  (1, 1, 'Task track'),(2, 1, 'CLP'),(3, 1, 'Survey Management'),(4, 2, 'HR Management'),(5, 3, 'Task Track'),
+  (6, 3, 'GRS'),(7, 3, 'DDS'),(8, 4, 'HR Management'),(9, 6, 'GL Management');
+
+-- To get the values by using JOIN query:
+SELECT E.Firstname, P.ProjectName FROM Employee_details E
+JOIN Project_Detail P ON E.EmployeeID = P.EmployeeID
+ORDER BY E.Firstname;
+
+-- To get the values by using LEFT JOIN query:
+SELECT E. Firstname,P.ProjectName FROM Employee_details E
+LEFT JOIN Project_Detail P ON E.EmployeeID = P.EmployeeID;
+
+-- To get the values by using RIGHT JOIN query:
+SELECT P.ProjectName,E.Firstname FROM Employee_details E
+RIGHT JOIN Project_Detail P ON E.EmployeeID = P.EmployeeID
+ORDER BY E.Firstname;
+
+-- To get the values by using FULL JOIN query:
+
+SELECT * FROM Employee_details E
+FULL JOIN Project_Detail P ON E.EmployeeID = P.EmployeeID;
