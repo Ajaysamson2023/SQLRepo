@@ -33,7 +33,9 @@
 - Used the TOP clause to get the top 20 products from dimproduct table.
 - Used top and percent to get the 50 percentage of customers from DimCustomer table. 
 - Used  max and min functions to get the maximum and minimum yearly income from the DimCustomer.
+
 **Unions**
+
 - Created department table with mentioned data and inserting values.
 - Apply Join on Employee and Department tables using the common column DeptID.
 - SQL query to display Dname, Avg. salary of Each dept. using Joins and Group by Clauses. 
