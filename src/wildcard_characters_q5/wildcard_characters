@@ -1,0 +1,44 @@
+use AdventureWorksDW2019
+
+-- To select all records from DimEmployee:
+
+SELECT * FROM  DimEmployee
+
+-- To get the records containing 'vi' name:
+
+SELECT DISTINCT EmailAddress FROM DimEmployee WHERE EmailAddress LIKE '%vi%';
+
+--  To get the records starts with 'a' and ending with 'b':
+
+SELECT EnglishProductName FROM DimProduct WHERE EnglishProductName LIKE 'b%e';
+
+-- To get records starts with 'r':
+
+SELECT EnglishProductName FROM DimProduct WHERE EnglishProductName LIKE '_r%';
+
+--  To get the records using IN operator:
+
+SELECT FirstName, DepartmentName, Title FROM DimEmployee WHERE Title IN ('Accountant', 'Chief Financial Officer');
+
+--  Concatenate by using query:
+
+SELECT FirstName + ' ' + LastName as "Employee Full Name" FROM DimEmployee;
+
+-- To get minimum unit price:
+
+SELECT MIN(UnitPrice) as MinUnitPrice FROM FactInternetSales;
+
+-- To calculate sum of prices:
+
+SELECT SUM(SalesAmount) as sum_salesAmount FROM FactInternetSales;
+
+-- To calculate average:
+
+SELECT AVG(TaxAmt) FROM  FactInternetSales;
+
+-- To get the records birth rate 1980-01-01' AND BirthDate <= '1985-12-31':
+
+SELECT FirstName, BirthDate FROM DimCustomer WHERE BirthDate >= '1980-01-01' AND BirthDate <= '1985-12-31' ORDER BY BirthDate;
+
+
+
