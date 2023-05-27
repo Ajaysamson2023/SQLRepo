@@ -25,3 +25,24 @@
 - Used <''>  to get all the city names except paris.
 - Used where,AND to get the city records with commission>0.14 and city is paris.
 - Used order by asc to get the records of the commission in ascending order.
+
+**Aggregate FunctionsQ4**
+
+- Restored the database from AdventureworksDW2019.
+- sorted the Lastname from the Dimcustomer table.
+- Used the TOP clause to get the top 20 products from dimproduct table.
+- Used top and percent to get the 50 percentage of customers from DimCustomer table. 
+- Used  max and min functions to get the maximum and minimum yearly income from the DimCustomer.
+**Unions**
+- Created department table with mentioned data and inserting values.
+- Apply Join on Employee and Department tables using the common column DeptID.
+- SQL query to display Dname, Avg. salary of Each dept. using Joins and Group by Clauses. 
+- Used AdventureWorksDW2019 database..
+- SQL query to display FirstName and BirthDate and birthdate should be between 01-01-1985 to 01-12-1985 from DimCustomer and DimEmployee tables using Union and Union all functions.
+
+**Joins**
+- Created Employee_details table and ProjectDetail table and inserting values in to it. 
+- Get employee name, project name order by firstname from "EmployeeDetail" and "ProjectDetail" for those employee which have assigned project already. 
+- Get employee name, project name order by firstname from "EmployeeDetail" and "ProjectDetail" for all employee even they have not assigned project.
+- Get all project name even they have not matching any employeeid, in left table, order by firstname from "EmployeeDetail" and "ProjectDetail". 
+- Get complete record(employeename, project name) from both tables([EmployeeDetail], [ProjectDetail]), if no match found in any table then show NULL.
