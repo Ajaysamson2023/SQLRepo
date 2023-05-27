@@ -1,0 +1,116 @@
+-- To create table:
+CREATE TABLE Employee_detail
+(EmployeeID int NOT NULL primary key,
+Firstname varchar(30),LastName varchar(30),Salary int,JoiningDate Date,
+Department varchar(30),Gender varchar(30));
+
+--To insert values into table:
+INSERT INTO Employee_detail(EmployeeID, Firstname, LastName, Salary, JoiningDate, Department, Gender)values
+(1, 'Vikas', 'Ahlawat', 600000, '2013-02-15', 'IT', 'Male'),(2, 'nikita', 'jain', 530000, '2014-01-09', 'HR', 'Female'),(3, 'Ashish', 'Kumar', 10000000, '2014-01-09', 'IT', 'Male'),
+(4, 'Nikhil', 'Sharma', 480000, '2014-01-09', 'HR', 'Male'),(5, 'anish', 'kadian', 500000, '2014-01-09', 'Payroll', 'Male');
+
+--To get FirstName in upper case:
+SELECT UPPER(FirstName) AS "First Name" from Employee_Detail;
+-- To get values from first and lastname whitespace:
+SELECT CONCAT(FirstName, ' ', LastName) AS "Name" from Employee_Detail;
+
+-- To get values 'k':
+SELECT * FROM Employee_Detail WHERE FirstName LIKE '%k%';
+
+-- To get values ends with 'h':
+SELECT * FROM Employee_Detail WHERE FirstName LIKE '%h';
+
+-- To get values 'a-p';
+SELECT * FROM Employee_Detail WHERE FirstName NOT LIKE '[a-p]%';
+
+--To get values 'A'5 letter using query:
+SELECT * FROM Employee_Detail WHERE FirstName LIKE 'A____';
+
+--To get unique values:
+SELECT DISTINCT Department FROM Employee_Detail;
+
+-- To get values by using max ad min query:
+SELECT MAX(Salary) AS "Highest Salary", MIN(Salary) AS "Lowest Salary" FROM Employee_Detail;
+
+-- To get values by using date query:
+SELECT FirstName, GETDATE() AS CurrentDate, JoiningDate, DATEDIFF(MONTH, JoiningDate, GETDATE()) AS MonthsDifference
+FROM Employee_Detail;
+
+-- To get values  year '2':
+SELECT * from Employee_Detail WHERE YEAR(JoiningDate) = 02;
+
+--To get values joining month is Jan('1'):
+SELECT * from Employee_Detail WHERE MONTH(JoiningDate) = 1;
+
+--To get datas between "2013-01-01" and "2013-12-01":
+SELECT * from Employee_Detail WHERE JoiningDate BETWEEN '2013-01-01' AND '2013-12-01';
+
+-- To get  "Vikas", "Ashish", and "Nikhil":
+
+SELECT * from Employee_Detail WHERE FirstName IN ('Vikas', 'Ashish', 'Nikhil');
+
+-- To get Gender as M/F (if male then M, if Female then F):
+SELECT FirstName,
+CASE WHEN Gender = 'Male' THEN 'M' ELSE 'F' END AS Gender from Employee_Detail;
+
+-- To get prefixed with "Hello ":
+SELECT CONCAT('Hello ', FirstName) AS HELLO from Employee_Detail;
+
+--To get Salary is less than 700000:
+SELECT * from Employee_Detail WHERE Salary BETWEEN 500000 AND 600000;
+
+-- To get  Salary is less than 700000:
+SELECT * from Employee_Detail WHERE Salary < 700000;
+
+-- Project details question:
+
+-- To Create  table:
+CREATE table ProjectDetails (ProjectDetailID INT, EmployeeID INT NOT NULL, ProjectName varchar(50));
+
+-- Inserting values:
+INSERT into ProjectDetails (ProjectDetailID, EmployeeID, ProjectName)
+VALUES
+  (1, 1, 'Task track'),(2, 1, 'CLP'), (3, 1, 'Survey Management'),
+  (4, 2, 'HR Management'), (5, 3, 'Task Track'),(6, 3, 'GRS'),
+  (7, 3, 'DDS'),(8, 4, 'HR Management'),(9, 6, 'GL Management');
+
+-- To get the department and department-wise total (sum) salary from the "EmployeeDetail" table:
+SELECT Department, SUM(Salary) FROM Employee_Detail GROUP BY Department;
+
+-- To  get the department and department-wise total (sum) salary, displayed in descending order according to salary:
+SELECT Department, SUM(Salary) FROM Employee_Detail
+GROUP BY Department ORDER BY SUM(Salary) DESC;
+
+-- To get SUM,COUNT salary by using query:
+SELECT Department, COUNT(Department) , SUM(Salary) from Employee_Detail
+GROUP BY Department;
+
+--To get  table,salary ascending order:
+SELECT Department, AVG(Salary) from Employee_Detail
+GROUP BY Department ORDER BY AVG(Salary) ASC;
+
+--To get  table, salary ascending order:
+SELECT Department, MAX(Salary)from Employee_Detail
+GROUP BY Department  order by MAX(Salary) ASC;
+
+--To get values by using joins,order by query:
+SELECT E.FirstName, P.ProjectName from Employee_Detail E
+INNER JOIN ProjectDetails P ON E.EmployeeID = P.EmployeeID  order by E.FirstName;
+
+-- To get values by left join,orderby query:
+SELECT E.FirstName, P.ProjectName from Employee_Detail E
+LEFT JOIN ProjectDetails P ON E.EmployeeID = P.EmployeeID  order by E.FirstName;
+
+-- To get values by full join,orderby query:
+
+SELECT E.FirstName, P.ProjectName from Employee_Detail E
+FULL JOIN ProjectDetails P ON E.EmployeeID = P.EmployeeID  order by E.FirstName;
+-- To get values by full join query:
+SELECT E.FirstName, P.ProjectName from Employee_Detail E
+FULL JOIN ProjectDetails P ON E.EmployeeID = P.EmployeeID;
+
+-- To get values by inner join,orderby,having query:
+SELECT E.FirstName, P.ProjectName from Employee_Detail E INNER JOIN ProjectDetails P ON E.EmployeeID = P.EmployeeID
+WHERE E.EmployeeID IN ( SELECT EmployeeID from ProjectDetails
+GROUP BY EmployeeID HAVING COUNT(ProjectDetailID) > 1 order by E.FirstName);
+
